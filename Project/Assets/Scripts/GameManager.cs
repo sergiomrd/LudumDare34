@@ -20,19 +20,23 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void ChangeLevel(string level)
+	public void ChangeLevel(string level, int scene)
 	{
 		switch (level) {
 
 		case "Kid":
+			OptionManager.instance.Scene = scene;
 			EditorSceneManager.LoadScene ("Kid");
 			break;
 
 		case "Adult":
+
+			OptionManager.instance.Scene = scene;
 			EditorSceneManager.LoadScene ("Adult");
 			break;
 
 		case "Elder":
+			OptionManager.instance.Scene = scene;
 			EditorSceneManager.LoadScene ("Elder");
 			break;
 

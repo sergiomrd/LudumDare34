@@ -39,7 +39,6 @@ public class DialogManager : MonoBehaviour {
 			timeLeft--;
 			if (timeLeft == 1)
 				CloseDialogs ();
-			Debug.Log (timeLeft);
 			yield return new WaitForSeconds (1);
 		}
 
@@ -72,6 +71,11 @@ public class DialogManager : MonoBehaviour {
 			{0, "¡Yeah! Take that"},
 			{1, "¡Boom Headshot¡"}
 		};
+	}
+
+	void OnLevelWasLoaded(int level)
+	{
+		dialog = GameObject.Find ("DialogText").GetComponent<Text> ();
 	}
 
 }
