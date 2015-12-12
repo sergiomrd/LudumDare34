@@ -64,8 +64,7 @@ public class OptionManager : MonoBehaviour {
 	public void SettingNewScene(int scene)
 	{
 
-		switch (scene) 
-		{
+		switch (scene) {
 		case 1:
 			character.sprite = arrayCharacters [0];
 			ButtonScenes ("Elder", 3, 4);
@@ -73,6 +72,7 @@ public class OptionManager : MonoBehaviour {
 		case 2:
 			ButtonScenes ("Elder", 5, 6);
 			break;
+		}
 	}
 
 	private void ButtonScenes(string nextSceneName, int nextScene1, int nextScene2)
