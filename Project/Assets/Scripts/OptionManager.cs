@@ -12,6 +12,7 @@ public class OptionManager : MonoBehaviour {
 	public List<Sprite> arrayCharacters = new List<Sprite>();
 	public List<Sprite> arrayBackgrounds = new List<Sprite> ();
 	public List<Sprite> arrayFurniture = new List<Sprite> ();
+	public List<Sprite> arrayButtons = new List<Sprite> ();
 
 	public int Scene {
 		get {
@@ -66,18 +67,28 @@ public class OptionManager : MonoBehaviour {
 	{
 
 		switch (scene) {
-		case 1:
+
+		//Fat gamer
+		case 1: 
 			character.sprite = arrayCharacters [2];
+			option1.image = arrayButtons [2];
+			option2.image = arrayButtons [3];
 			ButtonScenes ("Elder", 3, 4);
 			break;
+
+		//Rich Guy
 		case 2:
 			character.sprite = arrayCharacters [4];
 			ButtonScenes ("Elder", 5, 6);
 			break;
+		
+		//Young Developer
 		case 3:
 			character.sprite = arrayCharacters [0];
 			ButtonScenes ("Elder", 7, 8);
 			break;
+
+		//Old Gamer
 		case 4:
 			character.sprite = arrayCharacters [3];
 			ButtonScenes ("Elder", 8, 9);
