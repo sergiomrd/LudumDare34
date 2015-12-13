@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 
 public class DialogManager : MonoBehaviour {
 
-	public Text dialog;
+	public Text dialog, endHistory;
 	private List<string> listDialogs;
 	private Dictionary<int,string> dialogues;
 	private float timeLeft;
@@ -45,7 +45,7 @@ public class DialogManager : MonoBehaviour {
 		while (timeLeft > 0) 
 		{
 			timeLeft--;
-			if (timeLeft == 1)
+			if (timeLeft == 1 && EditorSceneManager.GetActiveScene ().name != "Dead")
 				CloseDialogs ();
 			yield return new WaitForSeconds (1);
 		}
@@ -66,8 +66,11 @@ public class DialogManager : MonoBehaviour {
 
 		if (level == 3) 
 		{
-			dialog = GameObject.Find ("Endtext").GetComponent<Text> ();
+			dialog = null;
+			endHistory = GameObject.Find ("Endtext").GetComponent<Text> ();
 			scene = OptionManager.instance.Scene;
+			Debug.Log (scene);
+			GetDeadHistories (scene);
 		}
 
 
@@ -81,7 +84,51 @@ public class DialogManager : MonoBehaviour {
 
 	private void CloseDialogs()
 	{
-		//dialog.gameObject.SetActive (false);
+		dialog.gameObject.SetActive (false);
+	}
+
+	private void GetDeadHistories(int scene)
+	{
+		switch (scene) 
+		{
+
+		//Minecraft
+		case 7:
+			endHistory.text = "After some years developing games, this guy created a masterpiece that made him rich," +
+				" but the money doesn't bring happiness so he was getting sad and sad till he died of depression";
+			break;
+		//Ludum dare
+		case 8:
+			endHistory.text = "He was going to participate in the LD with his awesome iMc, but something went wrong. He died in a fire";
+			break;
+		//Pixel
+		case 9:
+			endHistory.text = "He was a gamer all his life, he lived a lot of adventures in virtual worlds, however this time the videogames need him one more time." +
+				" He was killed by a giant limo lvl. 5";
+			break;
+		//Ovni
+		case 10:
+			endHistory.text = "Do you believe in conspiracies? He do. Was the first human in travel through another galaxy. He died accidentally after falling off the ship " +
+				"during an hyper space jump";
+			break;
+		//Corrupted
+		case 11:
+			endHistory.text = "You either die a hero, or live long enough to see yourself become the villain. He also died but as a corrupt politician while" +
+				" he was getting a fly to Sweden";
+			break;
+		//Normal
+		case 12:
+			endHistory.text = "You lived a normal life with a normal family in a normal house. He died of boredom";
+			break;
+		//Rockero
+		case 13:
+			endHistory.text = "Born to be wild! He said before the spotlight fell in his head";
+			break;
+		//Diogenes
+		case 14:
+			endHistory.text = "As a lonely and old man, he was trying to reach something in the top of that heavy boxes. Nobody went to his funeral";
+			break;
+		}
 	}
 
 	private void GetDialogs(int scene)

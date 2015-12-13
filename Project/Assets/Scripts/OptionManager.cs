@@ -85,7 +85,8 @@ public class OptionManager : MonoBehaviour {
 		switch (scene) {
 
 		//Minecraft
-		case 7: 
+		case 7:
+			
 			Instantiate (arrayDeads [3], arrayDeads [3].transform.position, Quaternion.identity);
 			break;
 		//LD
