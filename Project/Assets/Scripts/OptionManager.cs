@@ -71,27 +71,47 @@ public class OptionManager : MonoBehaviour {
 		//Fat gamer
 		case 1: 
 			character.sprite = arrayCharacters [2];
-			option1.image = arrayButtons [2];
-			option2.image = arrayButtons [3];
+			option1.image.overrideSprite = arrayButtons [2];
+			option2.image.overrideSprite = arrayButtons [3];
 			ButtonScenes ("Elder", 3, 4);
 			break;
 
 		//Rich Guy
 		case 2:
-			character.sprite = arrayCharacters [4];
+			character.sprite = arrayCharacters [5];
+			option1.image.overrideSprite = arrayButtons [6];
+			option2.image.overrideSprite = arrayButtons [5];
 			ButtonScenes ("Elder", 5, 6);
 			break;
 		
 		//Young Developer
 		case 3:
-			character.sprite = arrayCharacters [0];
+			character.sprite = arrayCharacters [3];
+			option1.image.overrideSprite = arrayButtons [7];
+			option2.image.overrideSprite = arrayButtons [4];
 			ButtonScenes ("Elder", 7, 8);
 			break;
 
 		//Old Gamer
 		case 4:
-			character.sprite = arrayCharacters [3];
+			character.sprite = arrayCharacters [4];
+			option1.image.overrideSprite = arrayButtons [9];
+			option2.image.overrideSprite = arrayButtons [8];
 			ButtonScenes ("Elder", 8, 9);
+			break;
+		//Familiar
+		case 5:
+			character.sprite = arrayCharacters [0];
+			option1.image.overrideSprite = arrayButtons [10];
+			option2.image.overrideSprite = arrayButtons [12];
+			ButtonScenes ("Elder", 9, 10);
+			break;
+		//Lonely
+		case 6:
+			character.sprite = arrayCharacters [1];
+			option1.image.overrideSprite = arrayButtons [11];
+			option2.image.overrideSprite = arrayButtons [13];
+			ButtonScenes ("Elder", 10, 11);
 			break;
 		}
 	}
