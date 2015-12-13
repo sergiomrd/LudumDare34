@@ -1,23 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-	public static GameManager Instance { get; private set; }
+	public static GameManager instance = null;
+	public Button restartButton;
 
 	void Awake()
 	{
-		if (Instance != null && Instance != this) {
+		if (instance != null) {
 
-			DestroyImmediate (gameObject);
+			Destroy(gameObject);
 
 		}
 
-		Instance = this;
+		instance = this;
+
 
 		DontDestroyOnLoad (gameObject);
+		
 
+
+
+	}
+
+	void Update()
+	{
+		
+	}
+
+	void OnLevelWasLoaded(int level)
+	{
+		if (level == 3) 
+		{
+			restartButton = GameObject.FindGameObjectWithTag ("RestartButton").GetComponent<Button> ();
+			restartButton.onClick.AddListener (() => {Restart();});
+		}
 	}
 
 	public void ChangeLevel(string level, int scene)
@@ -25,23 +45,20 @@ public class GameManager : MonoBehaviour {
 		switch (level) {
 
 		case "Kid":
-			OptionManager.Instance.Scene = scene;
+			
 			EditorSceneManager.LoadScene ("Kid");
 			break;
 
 		case "Adult":
-
-			OptionManager.Instance.Scene = scene;
+			
 			EditorSceneManager.LoadScene ("Adult");
 			break;
 
 		case "Elder":
-			OptionManager.Instance.Scene = scene;
 			EditorSceneManager.LoadScene ("Elder");
 			break;
 
 		case "Dead":
-			OptionManager.Instance.Scene = scene;
 			EditorSceneManager.LoadScene ("Dead");
 			break;
 

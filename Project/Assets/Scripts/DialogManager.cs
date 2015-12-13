@@ -56,17 +56,18 @@ public class DialogManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level)
 	{
+		
 		if (level < 3) 
 		{
 			dialog = GameObject.Find ("DialogText").GetComponent<Text> ();
-			scene = OptionManager.Instance.Scene;
+			scene = OptionManager.instance.Scene;
 			GetDialogs (scene);
 		}
 
 		if (level == 3) 
 		{
 			dialog = GameObject.Find ("Endtext").GetComponent<Text> ();
-			scene = OptionManager.Instance.Scene;
+			scene = OptionManager.instance.Scene;
 		}
 
 
@@ -80,7 +81,7 @@ public class DialogManager : MonoBehaviour {
 
 	private void CloseDialogs()
 	{
-		dialog.gameObject.SetActive (false);
+		//dialog.gameObject.SetActive (false);
 	}
 
 	private void GetDialogs(int scene)

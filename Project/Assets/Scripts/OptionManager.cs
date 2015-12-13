@@ -2,13 +2,14 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class OptionManager : MonoBehaviour {
 
-	public static OptionManager Instance { get; private set; }
+	public static OptionManager instance = null;
 	public SpriteRenderer character, background;
 	public Button option1, option2;
-	private int scene;
+	public int scene = 0;
 	public List<Sprite> arrayCharacters = new List<Sprite>();
 	public List<Sprite> arrayBackgrounds = new List<Sprite> ();
 	public List<Sprite> arrayFurniture = new List<Sprite> ();
@@ -26,56 +27,61 @@ public class OptionManager : MonoBehaviour {
 		
 	void Awake()
 	{
-		if (Instance != null && Instance != this) {
+		if (instance != null) {
 
-			DestroyImmediate (gameObject);
+			Destroy(gameObject);
 
 		}
 
-		Instance = this;
+		instance = this;
 
 		DontDestroyOnLoad (gameObject);
+		
 
-		character = GameObject.FindGameObjectWithTag ("Character").GetComponent<SpriteRenderer>();
-		background = GameObject.FindGameObjectWithTag ("bg").GetComponent<SpriteRenderer>();
-		option1 = GameObject.FindGameObjectWithTag ("Option1").GetComponent<Button> ();
-		option2 = GameObject.FindGameObjectWithTag ("Option2").GetComponent<Button> ();
+		//scene = 0;
+		GettingReferences ();
+		SettingNewScene (Scene);
 
 	}
 
 	void OnLevelWasLoaded(int level)
 	{
-		if (level < 3) 
+		if (level == 0)
+		{	
+			Scene = 0;
+			GettingReferences ();
+			SettingNewScene (Scene);
+		}
+
+
+		if (level > 0 && level < 3) 
 		{
 			GettingReferences ();
-			SettingNewScene (scene);
+			SettingNewScene (Scene);
 		}
 
 		if (level == 3)
 		{
-			SettingDeadScenes (scene);
+			SettingDeadScenes (Scene);
 		}
 
 
 	}
-
+		
 	private void GettingReferences()
 	{
+
 		character = GameObject.FindGameObjectWithTag ("Character").GetComponent<SpriteRenderer>();
 		background = GameObject.FindGameObjectWithTag ("bg").GetComponent<SpriteRenderer>();
 		option1 = GameObject.FindGameObjectWithTag ("Option1").GetComponent<Button> ();
 		option2 = GameObject.FindGameObjectWithTag ("Option2").GetComponent<Button> ();
 	}
-
-	void Start()
-	{
-		//Kid scene
-		ButtonScenes ("Adult", 1, 2);
-	}
-
+		
 	#region Dead Scenes
 	public void SettingDeadScenes(int scene)
 	{
+
+
 		switch (scene) {
 
 		//Minecraft
@@ -84,85 +90,95 @@ public class OptionManager : MonoBehaviour {
 			break;
 		//LD
 		case 8: 
-			Instantiate (arrayDeads [7], arrayDeads [7].transform.position, Quaternion.identity);
+			Instantiate (arrayDeads [5], arrayDeads [5].transform.position, Quaternion.identity);
 			break;
 		//Pixel
 		case 9: 
-			Instantiate (arrayDeads [5], arrayDeads [5].transform.position, Quaternion.identity);
+			Instantiate (arrayDeads [2], arrayDeads [2].transform.position, Quaternion.identity);
 			break;
 		//Ovni
 		case 10: 
-			Instantiate (arrayDeads [0], arrayDeads [0].transform.position, Quaternion.identity);
+			Instantiate (arrayDeads [7], arrayDeads [7].transform.position, Quaternion.identity);
 			break;
 		//Corrupto
 		case 11: 
-			Instantiate (arrayDeads [1], arrayDeads [1].transform.position, Quaternion.identity);
+			Instantiate (arrayDeads [6], arrayDeads [6].transform.position, Quaternion.identity);
 			break;
 		//Normal
 		case 12: 
 			Instantiate (arrayDeads [4], arrayDeads [4].transform.position, Quaternion.identity);
 			break;
-		//Corrupto
+		//Rockero
 		case 13: 
-			Instantiate (arrayDeads [6], arrayDeads [6].transform.position, Quaternion.identity);
+			Instantiate (arrayDeads [1], arrayDeads [1].transform.position, Quaternion.identity);
 			break;
-		//Normal
+		//Diogenes
 		case 14: 
-			Instantiate (arrayDeads [2], arrayDeads [2].transform.position, Quaternion.identity);
+			Instantiate (arrayDeads [0], arrayDeads [0].transform.position, Quaternion.identity);
 			break;
 		}
 	}
 	#endregion
 	 
 	#region Normal Scenes
-	public void SettingNewScene(int scene)
+	public void SettingNewScene(int Scene)
 	{
 
+
+
 		switch (scene) {
+
+		//Kid
+		case 0:
+			character.sprite = arrayCharacters [6];
+			option1.image.overrideSprite = arrayButtons [8];
+			option2.image.overrideSprite = arrayButtons [9];
+			ButtonScenes ("Adult", 1, 2);
+			break;
 
 		//Fat gamer
 		case 1: 
 			character.sprite = arrayCharacters [2];
-			option1.image.overrideSprite = arrayButtons [2];
-			option2.image.overrideSprite = arrayButtons [3];
+			option1.image.overrideSprite = arrayButtons [6];
+			option2.image.overrideSprite = arrayButtons [5];
 			ButtonScenes ("Elder", 3, 4);
 			break;
 
 		//Rich Guy
 		case 2:
 			character.sprite = arrayCharacters [5];
-			option1.image.overrideSprite = arrayButtons [6];
-			option2.image.overrideSprite = arrayButtons [5];
+			option1.image.overrideSprite = arrayButtons [10];
+			option2.image.overrideSprite = arrayButtons [3];
 			ButtonScenes ("Elder", 5, 6);
 			break;
 		
 		//Young Developer
 		case 3:
 			character.sprite = arrayCharacters [3];
-			option1.image.overrideSprite = arrayButtons [7];
-			option2.image.overrideSprite = arrayButtons [4];
+			option1.image.overrideSprite = arrayButtons [12];
+			option2.image.overrideSprite = arrayButtons [2];
 			ButtonScenes ("Dead", 7, 8);
 			break;
 
 		//Old Gamer
 		case 4:
 			character.sprite = arrayCharacters [4];
-			option1.image.overrideSprite = arrayButtons [9];
-			option2.image.overrideSprite = arrayButtons [8];
+			option1.image.overrideSprite = arrayButtons [7];
+			option2.image.overrideSprite = arrayButtons [4];
 			ButtonScenes ("Dead", 9, 10);
 			break;
 		//Familiar
 		case 5:
 			character.sprite = arrayCharacters [0];
-			option1.image.overrideSprite = arrayButtons [10];
-			option2.image.overrideSprite = arrayButtons [12];
+			option1.image.overrideSprite = arrayButtons [13];
+			option2.image.overrideSprite = arrayButtons [1];
 			ButtonScenes ("Dead", 11, 12);
 			break;
 		//Lonely
 		case 6:
 			character.sprite = arrayCharacters [1];
-			option1.image.overrideSprite = arrayButtons [11];
-			option2.image.overrideSprite = arrayButtons [13];
+			option1.image.overrideSprite = arrayButtons [0];
+			option2.image.overrideSprite = arrayButtons [11];
 			ButtonScenes ("Dead", 13, 14);
 			break;
 		}
@@ -171,8 +187,8 @@ public class OptionManager : MonoBehaviour {
 
 	private void ButtonScenes(string nextSceneName, int nextScene1, int nextScene2)
 	{
-		option1.onClick.AddListener(() => GameManager.Instance.ChangeLevel (nextSceneName, nextScene1));
-		option2.onClick.AddListener(() => GameManager.Instance.ChangeLevel (nextSceneName, nextScene2));
+		option1.onClick.AddListener(() => {GameManager.instance.ChangeLevel (nextSceneName, nextScene1); Scene = nextScene1;});
+		option2.onClick.AddListener(() => {GameManager.instance.ChangeLevel (nextSceneName, nextScene2); Scene = nextScene2;});
 	}
 	
 }
