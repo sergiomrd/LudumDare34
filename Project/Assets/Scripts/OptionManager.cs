@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class OptionManager : MonoBehaviour {
 
-	public static OptionManager instance = null;
+	public static OptionManager Instance { get; private set; }
 	public SpriteRenderer character, background;
 	public Button option1, option2;
 	private int scene;
@@ -13,6 +13,7 @@ public class OptionManager : MonoBehaviour {
 	public List<Sprite> arrayBackgrounds = new List<Sprite> ();
 	public List<Sprite> arrayFurniture = new List<Sprite> ();
 	public List<Sprite> arrayButtons = new List<Sprite> ();
+	public List<GameObject> arrayDeads = new List<GameObject> ();
 
 	public int Scene {
 		get {
@@ -25,13 +26,13 @@ public class OptionManager : MonoBehaviour {
 		
 	void Awake()
 	{
-		if (instance != null) {
+		if (Instance != null && Instance != this) {
 
 			DestroyImmediate (gameObject);
 
 		}
 
-		instance = this;
+		Instance = this;
 
 		DontDestroyOnLoad (gameObject);
 
@@ -44,8 +45,17 @@ public class OptionManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level)
 	{
-		GettingReferences ();
-		SettingNewScene (scene);
+		if (level < 3) 
+		{
+			GettingReferences ();
+			SettingNewScene (scene);
+		}
+
+		if (level == 3)
+		{
+			SettingDeadScenes (scene);
+		}
+
 
 	}
 
@@ -59,10 +69,52 @@ public class OptionManager : MonoBehaviour {
 
 	void Start()
 	{
-		//nexSceneName, Button1NextScene, Button2NextScene, lastScene
+		//Kid scene
 		ButtonScenes ("Adult", 1, 2);
 	}
 
+	#region Dead Scenes
+	public void SettingDeadScenes(int scene)
+	{
+		switch (scene) {
+
+		//Minecraft
+		case 7: 
+			Instantiate (arrayDeads [3], arrayDeads [3].transform.position, Quaternion.identity);
+			break;
+		//LD
+		case 8: 
+			Instantiate (arrayDeads [7], arrayDeads [7].transform.position, Quaternion.identity);
+			break;
+		//Pixel
+		case 9: 
+			Instantiate (arrayDeads [5], arrayDeads [5].transform.position, Quaternion.identity);
+			break;
+		//Ovni
+		case 10: 
+			Instantiate (arrayDeads [0], arrayDeads [0].transform.position, Quaternion.identity);
+			break;
+		//Corrupto
+		case 11: 
+			Instantiate (arrayDeads [1], arrayDeads [1].transform.position, Quaternion.identity);
+			break;
+		//Normal
+		case 12: 
+			Instantiate (arrayDeads [4], arrayDeads [4].transform.position, Quaternion.identity);
+			break;
+		//Corrupto
+		case 13: 
+			Instantiate (arrayDeads [6], arrayDeads [6].transform.position, Quaternion.identity);
+			break;
+		//Normal
+		case 14: 
+			Instantiate (arrayDeads [2], arrayDeads [2].transform.position, Quaternion.identity);
+			break;
+		}
+	}
+	#endregion
+	 
+	#region Normal Scenes
 	public void SettingNewScene(int scene)
 	{
 
@@ -89,7 +141,7 @@ public class OptionManager : MonoBehaviour {
 			character.sprite = arrayCharacters [3];
 			option1.image.overrideSprite = arrayButtons [7];
 			option2.image.overrideSprite = arrayButtons [4];
-			ButtonScenes ("Elder", 7, 8);
+			ButtonScenes ("Dead", 7, 8);
 			break;
 
 		//Old Gamer
@@ -97,29 +149,30 @@ public class OptionManager : MonoBehaviour {
 			character.sprite = arrayCharacters [4];
 			option1.image.overrideSprite = arrayButtons [9];
 			option2.image.overrideSprite = arrayButtons [8];
-			ButtonScenes ("Elder", 8, 9);
+			ButtonScenes ("Dead", 9, 10);
 			break;
 		//Familiar
 		case 5:
 			character.sprite = arrayCharacters [0];
 			option1.image.overrideSprite = arrayButtons [10];
 			option2.image.overrideSprite = arrayButtons [12];
-			ButtonScenes ("Elder", 9, 10);
+			ButtonScenes ("Dead", 11, 12);
 			break;
 		//Lonely
 		case 6:
 			character.sprite = arrayCharacters [1];
 			option1.image.overrideSprite = arrayButtons [11];
 			option2.image.overrideSprite = arrayButtons [13];
-			ButtonScenes ("Elder", 10, 11);
+			ButtonScenes ("Dead", 13, 14);
 			break;
 		}
 	}
+	#endregion
 
 	private void ButtonScenes(string nextSceneName, int nextScene1, int nextScene2)
 	{
-		option1.onClick.AddListener(() => GameManager.instance.ChangeLevel (nextSceneName, nextScene1));
-		option2.onClick.AddListener(() => GameManager.instance.ChangeLevel (nextSceneName, nextScene2));
+		option1.onClick.AddListener(() => GameManager.Instance.ChangeLevel (nextSceneName, nextScene1));
+		option2.onClick.AddListener(() => GameManager.Instance.ChangeLevel (nextSceneName, nextScene2));
 	}
 	
 }

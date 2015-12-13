@@ -4,17 +4,17 @@ using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-	public static GameManager instance = null;
+	public static GameManager Instance { get; private set; }
 
 	void Awake()
 	{
-		if (instance != null) {
+		if (Instance != null && Instance != this) {
 
 			DestroyImmediate (gameObject);
 
 		}
 
-		instance = this;
+		Instance = this;
 
 		DontDestroyOnLoad (gameObject);
 
@@ -25,23 +25,33 @@ public class GameManager : MonoBehaviour {
 		switch (level) {
 
 		case "Kid":
-			OptionManager.instance.Scene = scene;
+			OptionManager.Instance.Scene = scene;
 			EditorSceneManager.LoadScene ("Kid");
 			break;
 
 		case "Adult":
 
-			OptionManager.instance.Scene = scene;
+			OptionManager.Instance.Scene = scene;
 			EditorSceneManager.LoadScene ("Adult");
 			break;
 
 		case "Elder":
-			OptionManager.instance.Scene = scene;
+			OptionManager.Instance.Scene = scene;
 			EditorSceneManager.LoadScene ("Elder");
 			break;
 
-		}
+		case "Dead":
+			OptionManager.Instance.Scene = scene;
+			EditorSceneManager.LoadScene ("Dead");
+			break;
 
+		}
+	
+	}
+
+	public void Restart()
+	{
+		EditorSceneManager.LoadScene ("Kid");
 	}
 
 }

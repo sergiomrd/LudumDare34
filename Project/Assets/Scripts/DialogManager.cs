@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 
 public class DialogManager : MonoBehaviour {
 
@@ -25,11 +26,15 @@ public class DialogManager : MonoBehaviour {
 
 	void Update()
 	{
-		if (timeOut) {
-			timeOut = false;
-			ShowDialogs ();
-			StartCoroutine (CountDown ());
+		if (EditorSceneManager.GetActiveScene ().name != "Dead") 
+		{
+			if (timeOut) {
+				timeOut = false;
+				ShowDialogs ();
+				StartCoroutine (CountDown ());
+			}
 		}
+
 	}
 		
 
@@ -49,11 +54,22 @@ public class DialogManager : MonoBehaviour {
 
 	}
 
-	void OnLevelWasLoaded()
+	void OnLevelWasLoaded(int level)
 	{
-		dialog = GameObject.Find ("DialogText").GetComponent<Text> ();
-		scene = OptionManager.instance.Scene;
-		GetDialogs (scene);
+		if (level < 3) 
+		{
+			dialog = GameObject.Find ("DialogText").GetComponent<Text> ();
+			scene = OptionManager.Instance.Scene;
+			GetDialogs (scene);
+		}
+
+		if (level == 3) 
+		{
+			dialog = GameObject.Find ("Endtext").GetComponent<Text> ();
+			scene = OptionManager.Instance.Scene;
+		}
+
+
 	}
 
 	private void ShowDialogs()
