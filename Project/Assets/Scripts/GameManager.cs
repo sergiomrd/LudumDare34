@@ -1,34 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-	public static GameManager instance = null;
+	public static GameManager Instance { get; private set; }
 	public Button restartButton;
+	private DialogManager dialog;
 
 	void Awake()
 	{
-		if (instance != null) {
+		if (Instance != null && Instance != this) {
 
-			Destroy(gameObject);
+			Destroy (gameObject);
 
+		} else 
+		{
+			Instance = this;
+
+
+			DontDestroyOnLoad (gameObject);
 		}
 
-		instance = this;
-
-
-		DontDestroyOnLoad (gameObject);
-		
-
-
-
 	}
+		
 
 	void Update()
 	{
-		
+		if(Input.GetKeyDown(KeyCode.Escape))
+			{
+			Application.Quit ();
+			}
 	}
 
 	void OnLevelWasLoaded(int level)
@@ -45,21 +48,25 @@ public class GameManager : MonoBehaviour {
 		switch (level) {
 
 		case "Kid":
-			
-			EditorSceneManager.LoadScene ("Kid");
+
+			OptionManager.Instance.Scene = scene;
+			SceneManager.LoadScene ("Kid");
 			break;
 
 		case "Adult":
-			
-			EditorSceneManager.LoadScene ("Adult");
+
+			OptionManager.Instance.Scene = scene;
+			SceneManager.LoadScene ("Adult");
 			break;
 
 		case "Elder":
-			EditorSceneManager.LoadScene ("Elder");
+			OptionManager.Instance.Scene = scene;
+			SceneManager.LoadScene ("Elder");
 			break;
 
 		case "Dead":
-			EditorSceneManager.LoadScene ("Dead");
+			OptionManager.Instance.Scene = scene;
+			SceneManager.LoadScene ("Dead");
 			break;
 
 		}
@@ -68,7 +75,7 @@ public class GameManager : MonoBehaviour {
 
 	public void Restart()
 	{
-		EditorSceneManager.LoadScene ("Kid");
+		ChangeLevel("Kid",0);
 	}
 
 }

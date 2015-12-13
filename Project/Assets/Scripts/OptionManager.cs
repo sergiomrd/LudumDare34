@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class OptionManager : MonoBehaviour {
 
-	public static OptionManager instance = null;
+	public static OptionManager Instance { get; private set; }
 	public SpriteRenderer character, background;
 	public Button option1, option2;
-	public int scene = 0;
+	private int scene = 0;
 	public List<Sprite> arrayCharacters = new List<Sprite>();
 	public List<Sprite> arrayBackgrounds = new List<Sprite> ();
 	public List<Sprite> arrayFurniture = new List<Sprite> ();
@@ -27,15 +27,17 @@ public class OptionManager : MonoBehaviour {
 		
 	void Awake()
 	{
-		if (instance != null) {
+		if (Instance != null && Instance != this) {
 
 			Destroy(gameObject);
 
+		}else 
+		{
+			Instance = this;
+
+
+			DontDestroyOnLoad (gameObject);
 		}
-
-		instance = this;
-
-		DontDestroyOnLoad (gameObject);
 		
 
 		//scene = 0;
@@ -188,8 +190,8 @@ public class OptionManager : MonoBehaviour {
 
 	private void ButtonScenes(string nextSceneName, int nextScene1, int nextScene2)
 	{
-		option1.onClick.AddListener(() => {GameManager.instance.ChangeLevel (nextSceneName, nextScene1); Scene = nextScene1;});
-		option2.onClick.AddListener(() => {GameManager.instance.ChangeLevel (nextSceneName, nextScene2); Scene = nextScene2;});
+		option1.onClick.AddListener(() => {GameManager.Instance.ChangeLevel (nextSceneName, nextScene1); Scene = nextScene1;});
+		option2.onClick.AddListener(() => {GameManager.Instance.ChangeLevel (nextSceneName, nextScene2); Scene = nextScene2;});
 	}
 	
 }

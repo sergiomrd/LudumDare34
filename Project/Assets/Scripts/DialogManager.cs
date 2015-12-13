@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class DialogManager : MonoBehaviour {
 
@@ -26,7 +26,7 @@ public class DialogManager : MonoBehaviour {
 
 	void Update()
 	{
-		if (EditorSceneManager.GetActiveScene ().name != "Dead") 
+		if (SceneManager.GetActiveScene ().name != "Dead") 
 		{
 			if (timeOut) {
 				timeOut = false;
@@ -45,7 +45,7 @@ public class DialogManager : MonoBehaviour {
 		while (timeLeft > 0) 
 		{
 			timeLeft--;
-			if (timeLeft == 1 && EditorSceneManager.GetActiveScene ().name != "Dead")
+			if (timeLeft == 1 && SceneManager.GetActiveScene ().name != "Dead")
 				CloseDialogs ();
 			yield return new WaitForSeconds (1);
 		}
@@ -59,8 +59,9 @@ public class DialogManager : MonoBehaviour {
 		
 		if (level < 3) 
 		{
+			endHistory = null;
 			dialog = GameObject.Find ("DialogText").GetComponent<Text> ();
-			scene = OptionManager.instance.Scene;
+			scene = OptionManager.Instance.Scene;
 			GetDialogs (scene);
 		}
 
@@ -68,8 +69,7 @@ public class DialogManager : MonoBehaviour {
 		{
 			dialog = null;
 			endHistory = GameObject.Find ("Endtext").GetComponent<Text> ();
-			scene = OptionManager.instance.Scene;
-			Debug.Log (scene);
+			scene = OptionManager.Instance.Scene;
 			GetDeadHistories (scene);
 		}
 
@@ -87,6 +87,11 @@ public class DialogManager : MonoBehaviour {
 		dialog.gameObject.SetActive (false);
 	}
 
+	private void ClearDialogs()
+	{
+		listDialogs.Clear ();
+	}
+
 	private void GetDeadHistories(int scene)
 	{
 		switch (scene) 
@@ -99,22 +104,22 @@ public class DialogManager : MonoBehaviour {
 			break;
 		//Ludum dare
 		case 8:
-			endHistory.text = "He was going to participate in the LD with his awesome iMc, but something went wrong. He died in a fire";
+			endHistory.text = "He was going to participate in the LD with his awesome iMc, but something went wrong. He died in flames";
 			break;
 		//Pixel
 		case 9:
-			endHistory.text = "He was a gamer all his life, he lived a lot of adventures in virtual worlds, however this time the videogames need him one more time." +
+			endHistory.text = "He was a gamer all his life, he lived a lot of adventures in all kind of virtual worlds, however this time the videogames need him one more time." +
 				" He was killed by a giant limo lvl. 5";
 			break;
 		//Ovni
 		case 10:
-			endHistory.text = "Do you believe in conspiracies? He do. Was the first human in travel through another galaxy. He died accidentally after falling off the ship " +
+			endHistory.text = "Do you believe in conspiracies? He did. Was the first human in travel through another galaxy. He died accidentally after falling off the ship " +
 				"during an hyper space jump";
 			break;
 		//Corrupted
 		case 11:
 			endHistory.text = "You either die a hero, or live long enough to see yourself become the villain. He also died but as a corrupt politician while" +
-				" he was getting a fly to Sweden";
+				" he was getting a fly to Switzerland";
 			break;
 		//Normal
 		case 12:
@@ -133,7 +138,7 @@ public class DialogManager : MonoBehaviour {
 
 	private void GetDialogs(int scene)
 	{
-		listDialogs.Clear ();
+		ClearDialogs ();
 
 		switch (scene) 
 		{
@@ -142,7 +147,9 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 0; i < 3; i++) 
 			{
 				listDialogs.Add(dialogues[i]);
+
 			}
+			Debug.Log ("tengo: " + listDialogs.Count);
 			break;
 
 		//Fat Gamer
@@ -150,6 +157,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 3; i < 9; i++) {
 				listDialogs.Add (dialogues [i]);
 			}
+			Debug.Log ("tengo: " + listDialogs.Count);
 			break;
 
 		//Rich Guy
@@ -157,6 +165,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 16; i < 22; i++) {
 				listDialogs.Add (dialogues [i]);
 			}
+			Debug.Log ("tengo: " + listDialogs.Count);
 			break;
 
 		//Young Developer
@@ -164,6 +173,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 22; i < 28; i++) {
 				listDialogs.Add (dialogues [i]);
 			}
+			Debug.Log ("tengo: " + listDialogs.Count);
 			break;
 		
 		//Old Gamer
@@ -171,6 +181,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 9; i < 16; i++) {
 				listDialogs.Add (dialogues [i]);
 			}
+			Debug.Log ("tengo: " + listDialogs.Count);
 			break;
 
 		//Familiar
@@ -178,6 +189,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 28; i < 32; i++) {
 				listDialogs.Add (dialogues [i]);
 			}
+			Debug.Log ("tengo: " + listDialogs.Count);
 			break;
 
 		//Lonely
@@ -185,6 +197,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 32; i < 36; i++) {
 				listDialogs.Add (dialogues [i]);
 			}
+			Debug.Log ("tengo: " + listDialogs.Count);
 			break;
 		}
 
@@ -245,5 +258,6 @@ public class DialogManager : MonoBehaviour {
 
 		};
 	}
+		
 		
 }
