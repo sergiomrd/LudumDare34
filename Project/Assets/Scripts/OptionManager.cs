@@ -10,10 +10,9 @@ public class OptionManager : MonoBehaviour {
 	public GameObject character, background;
 	public Button option1, option2;
 	private int scene = 0;
-	public List<Sprite> arrayCharacters = new List<Sprite>();
 	public List<GameObject> listCharacters = new List<GameObject> ();
 	public List<GameObject> listBackgrounds = new List<GameObject> ();
-	public List<Sprite> arrayFurniture = new List<Sprite> ();
+	public List<GameObject> listFurniture = new List<GameObject> ();
 	public List<Sprite> arrayButtons = new List<Sprite> ();
 	public List<GameObject> arrayDeads = new List<GameObject> ();
 
@@ -39,6 +38,9 @@ public class OptionManager : MonoBehaviour {
 
 			DontDestroyOnLoad (gameObject);
 		}
+
+		GettingReferences ();
+		SettingNewScene(Scene);
 
 	}
 
@@ -126,9 +128,15 @@ public class OptionManager : MonoBehaviour {
 
 		//Kid
 		case 0:
-			//character.sprite = arrayCharacters [6];
-			character = Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity) as GameObject;
-			background = Instantiate(listBackgrounds[2],listBackgrounds[2].transform.position,Quaternion.identity) as GameObject;
+			character = Instantiate (listCharacters [0], listCharacters [0].transform.position, Quaternion.identity) as GameObject;
+			background = Instantiate (listBackgrounds [2], listBackgrounds [2].transform.position, Quaternion.identity) as GameObject;
+
+			//Colliders
+			Instantiate (listFurniture [0], listFurniture [0].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [1], listFurniture [1].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [2], listFurniture [2].transform.position, Quaternion.identity);
+
+
 			option1.image.overrideSprite = arrayButtons [8];
 			option2.image.overrideSprite = arrayButtons [9];
 			ButtonScenes ("Adult", 1, 2);
@@ -138,6 +146,13 @@ public class OptionManager : MonoBehaviour {
 		case 1: 
 			character = Instantiate(listCharacters[1],listCharacters[1].transform.position,Quaternion.identity) as GameObject;
 			background = Instantiate(listBackgrounds[0],listBackgrounds[0].transform.position,Quaternion.identity) as GameObject;
+
+			//Colliders
+			Instantiate (listFurniture [3], listFurniture [3].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [4], listFurniture [4].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [5], listFurniture [5].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [6], listFurniture [6].transform.position, Quaternion.identity);
+
 			option1.image.overrideSprite = arrayButtons [6];
 			option2.image.overrideSprite = arrayButtons [5];
 			ButtonScenes ("Elder", 3, 4);

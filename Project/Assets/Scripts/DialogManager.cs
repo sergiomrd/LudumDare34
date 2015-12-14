@@ -78,7 +78,7 @@ public class DialogManager : MonoBehaviour {
 	/// Shows the dialogs.
 	/// </summary>
 	/// <param name="type">Type dialogs.</param>
-	public void ShowDialogs(Clickable.type_dialog type)
+	public void ShowDialogs(Clickable.type_dialog type, int value, GameObject toInstantiate)
 	{
 		
 		switch (type) 
@@ -88,6 +88,51 @@ public class DialogManager : MonoBehaviour {
 			break;
 		
 		case Clickable.type_dialog.furniture:
+
+			switch (scene) 
+			{
+
+			//Kid
+			case 0:
+
+				switch (value) 
+				{
+				case 0:
+					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+					break;
+				case 1:
+					dialog.text = "A magazine with all the results of the bets between 1950 and 2000? Meh! I don't like sports";
+					break;
+				case 2:
+					dialog.text = "It's midnight and there is wet hair... What happened?";
+					break;
+				}
+
+				break;
+
+			//fat
+			case 1:
+
+				switch (value) 
+				{
+				case 0:
+					dialog.text = "I only have two reasons to love Katarina";
+					break;
+				case 1:
+					dialog.text = "I will be your Big Daddy, Elisabeth";
+					break;
+				case 2:
+					dialog.text = "I only do gameplays of innovative games. Like Call of Duty";
+					break;
+				case 3:
+					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+					break;
+				}
+
+				break;
+			}
+
+
 			break;
 			}
 			
@@ -106,7 +151,7 @@ public class DialogManager : MonoBehaviour {
 	{
 		characterDialogs.Clear ();
 	}
-
+		
 	private void GetDeadHistories(int scene)
 	{
 		switch (scene) 
