@@ -132,6 +132,24 @@ public class DialogManager : MonoBehaviour {
 				break;
 			}
 
+		case 2:
+
+			switch (value) 
+			{
+			case 0:
+				Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+				break;
+			case 1:
+				dialog.text = "I remember when the PC was master race. Better now that It's leyend race";
+				break;
+			case 2:
+				dialog.text = "What if I could have been a game developer... Nevermind, let's back to the game.";
+				break;
+			}
+
+			break;
+		}
+
 
 			break;
 			}
