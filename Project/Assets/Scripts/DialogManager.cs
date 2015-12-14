@@ -164,7 +164,7 @@ public class DialogManager : MonoBehaviour {
 				characterDialogs.Add(dialogues[i]);
 
 			}
-			Debug.Log ("tengo: " + characterDialogs.Count);
+
 			break;
 
 		//Fat Gamer
@@ -172,7 +172,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 3; i < 9; i++) {
 				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + characterDialogs.Count);
+		
 			break;
 
 		//Rich Guy
@@ -180,7 +180,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 16; i < 22; i++) {
 				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + characterDialogs.Count);
+		
 			break;
 
 		//Young Developer
@@ -188,7 +188,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 22; i < 28; i++) {
 				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + characterDialogs.Count);
+
 			break;
 		
 		//Old Gamer
@@ -196,7 +196,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 9; i < 16; i++) {
 				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + characterDialogs.Count);
+	
 			break;
 
 		//Familiar
@@ -204,7 +204,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 28; i < 32; i++) {
 				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + characterDialogs.Count);
+		
 			break;
 
 		//Lonely
@@ -212,7 +212,7 @@ public class DialogManager : MonoBehaviour {
 			for (int i = 32; i < 36; i++) {
 				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + characterDialogs.Count);
+	
 			break;
 		}
 

@@ -39,11 +39,10 @@ public class OptionManager : MonoBehaviour {
 
 			DontDestroyOnLoad (gameObject);
 		}
-		
 
-		//scene = 0;
+		//TO-DO DELETE THIS
 		GettingReferences ();
-		SettingNewScene (Scene);
+		SettingNewScene (scene);
 
 	}
 
