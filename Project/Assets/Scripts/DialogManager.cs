@@ -7,25 +7,26 @@ using UnityEngine.SceneManagement;
 public class DialogManager : MonoBehaviour {
 
 	public Text dialog, endHistory;
-	private List<string> listDialogs;
+	private List<string> characterDialogs;
 	private Dictionary<int,string> dialogues;
 	private float timeLeft;
 	private bool timeOut;
 	private int scene;
 
+
 	void Awake()
 	{
 		dialog = GameObject.Find ("DialogText").GetComponent<Text> ();
-		listDialogs = new List<string>();
+		characterDialogs = new List<string>();
 		InitDialogues ();
 		scene = 0;
 		GetDialogs (scene);
-		timeOut = false;
-		StartCoroutine (CountDown ());
+	
 	}
 
 	void Update()
 	{
+		/*
 		if (SceneManager.GetActiveScene ().name != "Dead") 
 		{
 			if (timeOut) {
@@ -34,23 +35,20 @@ public class DialogManager : MonoBehaviour {
 				StartCoroutine (CountDown ());
 			}
 		}
-
+*/
 	}
 		
 
-	IEnumerator CountDown()
+	public IEnumerator CountDown()
 	{
 		timeLeft = 4f;
-
 		while (timeLeft > 0) 
 		{
 			timeLeft--;
-			if (timeLeft == 1 && SceneManager.GetActiveScene ().name != "Dead")
-				CloseDialogs ();
 			yield return new WaitForSeconds (1);
 		}
-
-		timeOut = true;
+		CloseDialogs ();
+			
 
 	}
 
@@ -76,12 +74,29 @@ public class DialogManager : MonoBehaviour {
 
 	}
 
-	private void ShowDialogs()
+	/// <summary>
+	/// Shows the dialogs.
+	/// </summary>
+	/// <param name="type">Type dialogs.</param>
+	public void ShowDialogs(Clickable.type_dialog type)
 	{
-		dialog.text = listDialogs [Random.Range (0, listDialogs.Count)];
+		
+		switch (type) 
+		{
+		case Clickable.type_dialog.character:
+			dialog.text = characterDialogs [Random.Range (0, characterDialogs.Count)];
+			break;
+		
+		case Clickable.type_dialog.furniture:
+			break;
+			}
+			
 		dialog.gameObject.SetActive (true);
 	}
 
+	/// <summary>
+	/// Closes the dialogs.
+	/// </summary>
 	private void CloseDialogs()
 	{
 		dialog.gameObject.SetActive (false);
@@ -89,7 +104,7 @@ public class DialogManager : MonoBehaviour {
 
 	private void ClearDialogs()
 	{
-		listDialogs.Clear ();
+		characterDialogs.Clear ();
 	}
 
 	private void GetDeadHistories(int scene)
@@ -146,58 +161,58 @@ public class DialogManager : MonoBehaviour {
 		case 0:
 			for (int i = 0; i < 3; i++) 
 			{
-				listDialogs.Add(dialogues[i]);
+				characterDialogs.Add(dialogues[i]);
 
 			}
-			Debug.Log ("tengo: " + listDialogs.Count);
+			Debug.Log ("tengo: " + characterDialogs.Count);
 			break;
 
 		//Fat Gamer
 		case 1:
 			for (int i = 3; i < 9; i++) {
-				listDialogs.Add (dialogues [i]);
+				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + listDialogs.Count);
+			Debug.Log ("tengo: " + characterDialogs.Count);
 			break;
 
 		//Rich Guy
 		case 2:
 			for (int i = 16; i < 22; i++) {
-				listDialogs.Add (dialogues [i]);
+				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + listDialogs.Count);
+			Debug.Log ("tengo: " + characterDialogs.Count);
 			break;
 
 		//Young Developer
 		case 3:
 			for (int i = 22; i < 28; i++) {
-				listDialogs.Add (dialogues [i]);
+				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + listDialogs.Count);
+			Debug.Log ("tengo: " + characterDialogs.Count);
 			break;
 		
 		//Old Gamer
 		case 4:
 			for (int i = 9; i < 16; i++) {
-				listDialogs.Add (dialogues [i]);
+				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + listDialogs.Count);
+			Debug.Log ("tengo: " + characterDialogs.Count);
 			break;
 
 		//Familiar
 		case 5:
 			for (int i = 28; i < 32; i++) {
-				listDialogs.Add (dialogues [i]);
+				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + listDialogs.Count);
+			Debug.Log ("tengo: " + characterDialogs.Count);
 			break;
 
 		//Lonely
 		case 6:
 			for (int i = 32; i < 36; i++) {
-				listDialogs.Add (dialogues [i]);
+				characterDialogs.Add (dialogues [i]);
 			}
-			Debug.Log ("tengo: " + listDialogs.Count);
+			Debug.Log ("tengo: " + characterDialogs.Count);
 			break;
 		}
 

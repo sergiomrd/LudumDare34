@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class OptionManager : MonoBehaviour {
 
 	public static OptionManager Instance { get; private set; }
-	public SpriteRenderer character, background;
+	public GameObject character, background;
 	public Button option1, option2;
 	private int scene = 0;
 	public List<Sprite> arrayCharacters = new List<Sprite>();
-	public List<Sprite> arrayBackgrounds = new List<Sprite> ();
+	public List<GameObject> listCharacters = new List<GameObject> ();
+	public List<GameObject> listBackgrounds = new List<GameObject> ();
 	public List<Sprite> arrayFurniture = new List<Sprite> ();
 	public List<Sprite> arrayButtons = new List<Sprite> ();
 	public List<GameObject> arrayDeads = new List<GameObject> ();
@@ -72,9 +73,6 @@ public class OptionManager : MonoBehaviour {
 		
 	private void GettingReferences()
 	{
-
-		character = GameObject.FindGameObjectWithTag ("Character").GetComponent<SpriteRenderer>();
-		background = GameObject.FindGameObjectWithTag ("bg").GetComponent<SpriteRenderer>();
 		option1 = GameObject.FindGameObjectWithTag ("Option1").GetComponent<Button> ();
 		option2 = GameObject.FindGameObjectWithTag ("Option2").GetComponent<Button> ();
 	}
@@ -133,7 +131,8 @@ public class OptionManager : MonoBehaviour {
 
 		//Kid
 		case 0:
-			character.sprite = arrayCharacters [6];
+			//character.sprite = arrayCharacters [6];
+			character = Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity) as GameObject;
 			option1.image.overrideSprite = arrayButtons [8];
 			option2.image.overrideSprite = arrayButtons [9];
 			ButtonScenes ("Adult", 1, 2);
@@ -141,7 +140,8 @@ public class OptionManager : MonoBehaviour {
 
 		//Fat gamer
 		case 1: 
-			character.sprite = arrayCharacters [2];
+			character = Instantiate(listCharacters[1],listCharacters[1].transform.position,Quaternion.identity) as GameObject;
+			background = Instantiate(listBackgrounds[0],listBackgrounds[0].transform.position,Quaternion.identity) as GameObject;
 			option1.image.overrideSprite = arrayButtons [6];
 			option2.image.overrideSprite = arrayButtons [5];
 			ButtonScenes ("Elder", 3, 4);
@@ -149,7 +149,7 @@ public class OptionManager : MonoBehaviour {
 
 		//Rich Guy
 		case 2:
-			character.sprite = arrayCharacters [5];
+			Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity);
 			option1.image.overrideSprite = arrayButtons [10];
 			option2.image.overrideSprite = arrayButtons [3];
 			ButtonScenes ("Elder", 5, 6);
@@ -157,7 +157,8 @@ public class OptionManager : MonoBehaviour {
 		
 		//Young Developer
 		case 3:
-			character.sprite = arrayCharacters [3];
+			character = Instantiate(listCharacters[2],listCharacters[2].transform.position,Quaternion.identity) as GameObject;
+			background = Instantiate(listBackgrounds[1],listBackgrounds[1].transform.position,Quaternion.identity) as GameObject;
 			option1.image.overrideSprite = arrayButtons [12];
 			option2.image.overrideSprite = arrayButtons [2];
 			ButtonScenes ("Dead", 7, 8);
@@ -165,21 +166,21 @@ public class OptionManager : MonoBehaviour {
 
 		//Old Gamer
 		case 4:
-			character.sprite = arrayCharacters [4];
+			Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity);
 			option1.image.overrideSprite = arrayButtons [7];
 			option2.image.overrideSprite = arrayButtons [4];
 			ButtonScenes ("Dead", 9, 10);
 			break;
 		//Familiar
 		case 5:
-			character.sprite = arrayCharacters [0];
+			Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity);
 			option1.image.overrideSprite = arrayButtons [13];
 			option2.image.overrideSprite = arrayButtons [1];
 			ButtonScenes ("Dead", 11, 12);
 			break;
 		//Lonely
 		case 6:
-			character.sprite = arrayCharacters [1];
+			Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity);
 			option1.image.overrideSprite = arrayButtons [0];
 			option2.image.overrideSprite = arrayButtons [11];
 			ButtonScenes ("Dead", 13, 14);
