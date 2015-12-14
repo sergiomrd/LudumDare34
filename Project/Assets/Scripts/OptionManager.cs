@@ -162,6 +162,11 @@ public class OptionManager : MonoBehaviour {
 		case 2:
 			character = Instantiate(listCharacters[4],listCharacters[4].transform.position,Quaternion.identity) as GameObject;
 			background = Instantiate(listBackgrounds[4],listBackgrounds[4].transform.position,Quaternion.identity) as GameObject;
+
+			Instantiate (listFurniture [10], listFurniture [10].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [11], listFurniture [11].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [12], listFurniture [12].transform.position, Quaternion.identity);
+
 			option1.image.overrideSprite = arrayButtons [10];
 			option2.image.overrideSprite = arrayButtons [3];
 			ButtonScenes ("Elder", 5, 6);
@@ -180,6 +185,11 @@ public class OptionManager : MonoBehaviour {
 		case 4:
 			character = Instantiate(listCharacters[5],listCharacters[5].transform.position,Quaternion.identity) as GameObject;
 			background = Instantiate(listBackgrounds[5],listBackgrounds[5].transform.position,Quaternion.identity) as GameObject;
+
+			Instantiate (listFurniture [7], listFurniture [7].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [8], listFurniture [8].transform.position, Quaternion.identity);
+			Instantiate (listFurniture [9], listFurniture [9].transform.position, Quaternion.identity);
+
 			option1.image.overrideSprite = arrayButtons [7];
 			option2.image.overrideSprite = arrayButtons [4];
 			ButtonScenes ("Dead", 9, 10);

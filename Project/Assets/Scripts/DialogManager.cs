@@ -130,25 +130,43 @@ public class DialogManager : MonoBehaviour {
 				}
 
 				break;
-			}
+			//Old
+			case 4:
 
-		case 2:
+				switch (value) 
+				{
+				case 3:
+					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+					break;
+				case 1:
+					dialog.text = "I remember when the PC was a master race and not a leyend race like now";
+					break;
+				case 2:
+					dialog.text = "What if I could have been a developer...? Nevermind, let's back to the game";
+					break;
+				}
 
-			switch (value) 
-			{
-			case 0:
-				Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
 				break;
-			case 1:
-				dialog.text = "I remember when the PC was master race. Better now that It's leyend race";
-				break;
+			//Rich
 			case 2:
-				dialog.text = "What if I could have been a game developer... Nevermind, let's back to the game.";
+
+				switch (value) 
+				{
+				case 0:
+					dialog.text = "Eagle Trump is my idol";
+					break;
+				case 1:
+					dialog.text = "I can say I have studied in harvard, but the girls. The academic results were on count of my dad";
+					break;
+				case 2:
+					dialog.text = "I'm the wolf of Wall Street! *Hits his chest* Hmmm...Hmmm...Hmmmm...";
+					break;
+				}
+
 				break;
 			}
 
-			break;
-		}
+
 
 
 			break;
