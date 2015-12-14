@@ -14,7 +14,6 @@ public class Clickable : MonoBehaviour {
 	{
 		timePassed = 0f;
 		timeEnd = 0.5f;
-
 	}
 
 	void OnMouseDown()

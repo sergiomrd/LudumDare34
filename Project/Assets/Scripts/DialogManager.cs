@@ -12,6 +12,7 @@ public class DialogManager : MonoBehaviour {
 	private float timeLeft;
 	private bool timeOut;
 	private int scene;
+	private bool anim = false;
 
 
 	void Awake()
@@ -98,6 +99,7 @@ public class DialogManager : MonoBehaviour {
 				switch (value) 
 				{
 				case 0:
+					anim = true;
 					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
 					break;
 				case 1:
@@ -125,6 +127,7 @@ public class DialogManager : MonoBehaviour {
 					dialog.text = "I only do gameplays of innovative games. Like Call of Duty";
 					break;
 				case 3:
+					anim = true;
 					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
 					break;
 				}
@@ -136,13 +139,14 @@ public class DialogManager : MonoBehaviour {
 				switch (value) 
 				{
 				case 3:
+					anim = true;
 					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
 					break;
 				case 1:
 					dialog.text = "I remember when the PC was a master race and not a leyend race like now";
 					break;
 				case 2:
-					dialog.text = "What if I could have been a developer...? Nevermind, let's back to the game";
+					dialog.text = "What if I could have been a game developer...? Nevermind, let's back to the game";
 					break;
 				}
 
@@ -164,6 +168,21 @@ public class DialogManager : MonoBehaviour {
 				}
 
 				break;
+
+			case 3:
+
+				switch (value) 
+				{
+				case 0:
+					anim = true;
+					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+					break;
+				case 1:
+					dialog.text = "It's the only woman that entertains me. I'ts a load bearing poster too.";
+					break;
+				}
+
+				break;
 			}
 
 
@@ -171,8 +190,13 @@ public class DialogManager : MonoBehaviour {
 
 			break;
 			}
+
+		if (!anim) 
+		{
+			anim = false;
+			dialog.gameObject.SetActive (true);
+		}
 			
-		dialog.gameObject.SetActive (true);
 	}
 
 	/// <summary>
