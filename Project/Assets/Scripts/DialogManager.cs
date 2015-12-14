@@ -12,7 +12,7 @@ public class DialogManager : MonoBehaviour {
 	private float timeLeft;
 	private bool timeOut;
 	private int scene;
-	private bool anim = false;
+	private bool anim = true;
 
 
 	void Awake()
@@ -81,14 +81,18 @@ public class DialogManager : MonoBehaviour {
 	/// <param name="type">Type dialogs.</param>
 	public void ShowDialogs(Clickable.type_dialog type, int value, GameObject toInstantiate)
 	{
-		
+		StopCoroutine (CountDown());
+		StartCoroutine (CountDown ());
 		switch (type) 
 		{
 		case Clickable.type_dialog.character:
 			dialog.text = characterDialogs [Random.Range (0, characterDialogs.Count)];
+			dialog.gameObject.SetActive (true);
 			break;
 		
 		case Clickable.type_dialog.furniture:
+
+			anim = true;
 
 			switch (scene) 
 			{
@@ -99,14 +103,15 @@ public class DialogManager : MonoBehaviour {
 				switch (value) 
 				{
 				case 0:
-					anim = true;
+					
 					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+					anim = false;
 					break;
 				case 1:
-					dialog.text = "A magazine with all the results of the bets between 1950 and 2000? Meh! I don't like sports";
+					dialog.text = "A magazine with all bets results between 1950 and 2000? Meh! I don't like sports";
 					break;
 				case 2:
-					dialog.text = "It's midnight and there is wet hair... What happened?";
+					dialog.text = "It's midnight and there is a wet hair ball... What happened?";
 					break;
 				}
 
@@ -127,8 +132,9 @@ public class DialogManager : MonoBehaviour {
 					dialog.text = "I only do gameplays of innovative games. Like Call of Duty";
 					break;
 				case 3:
-					anim = true;
+					
 					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+					anim = false;
 					break;
 				}
 
@@ -139,11 +145,12 @@ public class DialogManager : MonoBehaviour {
 				switch (value) 
 				{
 				case 3:
-					anim = true;
+					
 					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+					anim = false;
 					break;
 				case 1:
-					dialog.text = "I remember when the PC was a master race and not a leyend race like now";
+					dialog.text = "I remember when the PC was a master race and not a legend race like now";
 					break;
 				case 2:
 					dialog.text = "What if I could have been a game developer...? Nevermind, let's back to the game";
@@ -160,7 +167,7 @@ public class DialogManager : MonoBehaviour {
 					dialog.text = "Eagle Trump is my idol";
 					break;
 				case 1:
-					dialog.text = "I can say I have studied in harvard, but the girls. The academic results were on count of my dad";
+					dialog.text = "I can say I have studied in harvard, but only the girls subject. The academic results were on count of my dad";
 					break;
 				case 2:
 					dialog.text = "I'm the wolf of Wall Street! *Hits his chest* Hmmm...Hmmm...Hmmmm...";
@@ -174,11 +181,43 @@ public class DialogManager : MonoBehaviour {
 				switch (value) 
 				{
 				case 0:
-					anim = true;
+					
 					Instantiate (toInstantiate, toInstantiate.gameObject.transform.position, Quaternion.identity);
+					anim = false;
 					break;
 				case 1:
-					dialog.text = "It's the only woman that entertains me. I'ts a load bearing poster too.";
+					dialog.text = "It's the only woman that entertains me. It's a load bearing poster too.";
+					break;
+				}
+
+				break;
+
+			case 5:
+
+				switch (value) 
+				{
+				case 0:
+					dialog.text = "See that columns, they look a bit pixelated but It cost hundred of billions";
+					break;
+				case 1:
+					dialog.text = "Smile, because yes, you can be as rich as me";
+					break;
+				case 2:
+					dialog.text = "This is my family, but I wouldn't vote for them";
+					break;
+				}
+
+				break;
+
+			case 6:
+
+				switch (value) 
+				{
+				case 0:
+					dialog.text = "I have lost everything, my purchased harvard diploma, my girlfriend, my popularity...";
+					break;
+				case 1:
+					dialog.text = "This is... ehm... ehm... I'm a rubber, you are glue";
 					break;
 				}
 
@@ -191,11 +230,13 @@ public class DialogManager : MonoBehaviour {
 			break;
 			}
 
-		if (!anim) 
+		if (anim) 
 		{
-			anim = false;
 			dialog.gameObject.SetActive (true);
+			anim = false;
 		}
+
+		Debug.Log (anim);
 			
 	}
 
@@ -332,11 +373,11 @@ public class DialogManager : MonoBehaviour {
 			//Ratkid
 			{0, "Yeah! Take that"},
 			{1, "Boom Headshot!"},
-			{2, "Woooahhh what an amazing pixels!"},
+			{2, "Woooahhh what an amazing pixels! This is so realistic"},
 			//Fatboy 
 			{3, "Hail to the Master Race"},
 			{4, "Oh Yeah? Your mom"},
-			{5, "I need more cheetoooos!"},
+			{5, "I'm running out of supplies. I need more cheetoooos!"},
 			{6, "It's sunny a day, better stay in home"},
 			{7, "Only 4k? This graphics sucks!"},
 			{8, "I played this game before it was mainstream"},
@@ -359,9 +400,9 @@ public class DialogManager : MonoBehaviour {
 			{22, "I don't have money to eat, but I have an iMc"},
 			{23, "Unity crashed... again"},
 			{24, "I'm the CEO-CTO-CIO-CFO-QA of my own studio"},
-			{25, "As a programmer, I don't know what I'm doing"},
+			{25, "As a programmer, I don't know what I'm doing when I'm coding"},
 			{26, "I don't know how to draw, better use Pixel Art. Still don't know how to draw"},
-			{27, "Videogames are my life"},
+			{27, "I'm glad to be an Indie developer"},
 			//Familiar
 			{28, "I have raised a multicultural family"},
 			{29, "My kids only want me for the money"},

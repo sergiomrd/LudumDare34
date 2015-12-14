@@ -93,35 +93,35 @@ public class CanvasManager : MonoBehaviour {
 
 		//Kid
 		case 0:
-			text1.text = "There was a boy";
-			text2.text = "that dreams with...";
+			text1.text = "There was a time";
+			text2.text = "when a boy was only a dreamer";
 			break;
 			//Fat gamer
 		case 1: 
 			text1.text = "The boy continued playing";
-			text2.text = "and was grown as a fat gamer";
+			text2.text = "and was grown as a Fat Gamer";
 			break;
 
 			//Rich Guy
 		case 2:
 			text1.text = "The boy decided to stop playing and go outside";
-			text2.text = "to be raised as a snob";
+			text2.text = "to be raised as a Snob";
 			break;
 
 			//Young Developer
 		case 3:
-			text1.text = "The fat gamer stops playing games";
+			text1.text = "The Fat Gamer stops playing games";
 			text2.text = "and starts making his own";
 			break;
 
 			//Old Gamer
 		case 4:
-			text1.text = "The fat gamer keeps playing and eating doritos";
+			text1.text = "The Fat Gamer keeps playing and eating doritos";
 			text2.text = "for the rest of his life";
 			break;
 			//Familiar
 		case 5:
-			text1.text = "The only thing he wants all his life";
+			text1.text = "The only thing he dreams all his life";
 			text2.text = "was to form a family.";
 			break;
 			//Lonely

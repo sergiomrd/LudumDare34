@@ -20,9 +20,11 @@ public class Clickable : MonoBehaviour {
 	{
 		if (Time.time > timePassed + timeEnd) 
 		{
+			Debug.Log (Time.time + " / " + timePassed );
 			GameManager.Instance.GetComponent<DialogManager> ().ShowDialogs (type, value, toInstantiate);
 			StartCoroutine (GameManager.Instance.GetComponent<DialogManager> ().CountDown ());
 			timePassed = Time.time;
+
 		}
 
 	}
