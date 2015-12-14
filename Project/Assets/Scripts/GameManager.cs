@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour {
 	public void Restart()
 	{
 		ChangeLevel("Kid",0);
+		AudioManager.Instance.GetRandomSong ();
 	}
 
 }

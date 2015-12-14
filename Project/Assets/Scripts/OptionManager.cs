@@ -128,6 +128,7 @@ public class OptionManager : MonoBehaviour {
 		case 0:
 			//character.sprite = arrayCharacters [6];
 			character = Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity) as GameObject;
+			background = Instantiate(listBackgrounds[2],listBackgrounds[2].transform.position,Quaternion.identity) as GameObject;
 			option1.image.overrideSprite = arrayButtons [8];
 			option2.image.overrideSprite = arrayButtons [9];
 			ButtonScenes ("Adult", 1, 2);
@@ -144,7 +145,8 @@ public class OptionManager : MonoBehaviour {
 
 		//Rich Guy
 		case 2:
-			Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity);
+			character = Instantiate(listCharacters[4],listCharacters[4].transform.position,Quaternion.identity) as GameObject;
+			background = Instantiate(listBackgrounds[4],listBackgrounds[4].transform.position,Quaternion.identity) as GameObject;
 			option1.image.overrideSprite = arrayButtons [10];
 			option2.image.overrideSprite = arrayButtons [3];
 			ButtonScenes ("Elder", 5, 6);
@@ -168,7 +170,8 @@ public class OptionManager : MonoBehaviour {
 			break;
 		//Familiar
 		case 5:
-			Instantiate(listCharacters[0],listCharacters[0].transform.position,Quaternion.identity);
+			character = Instantiate(listCharacters[3],listCharacters[3].transform.position,Quaternion.identity) as GameObject;
+			background = Instantiate(listBackgrounds[3],listBackgrounds[3].transform.position,Quaternion.identity) as GameObject;
 			option1.image.overrideSprite = arrayButtons [13];
 			option2.image.overrideSprite = arrayButtons [1];
 			ButtonScenes ("Dead", 11, 12);

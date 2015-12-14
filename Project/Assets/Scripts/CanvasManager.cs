@@ -73,7 +73,7 @@ public class CanvasManager : MonoBehaviour {
 
 		StartCoroutine (textFadeOut(0.5f,textPanel1));
 		StartCoroutine (textFadeOut(0.5f,textPanel2));
-		yield return new WaitForSeconds (2);
+		yield return new WaitForSeconds (5);
 		StartCoroutine (generalFadeIn (5, generalPanel));
 	}
 
