@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level)
 	{
-		if (level == 3) 
+		if (level == 4) 
 		{
 			restartButton = GameObject.FindGameObjectWithTag ("RestartButton").GetComponent<Button> ();
 			restartButton.onClick.AddListener (() => {Restart();});

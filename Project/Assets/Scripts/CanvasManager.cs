@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CanvasManager : MonoBehaviour {
 
@@ -8,16 +9,11 @@ public class CanvasManager : MonoBehaviour {
 	public Canvas historyCanvas;
 	public Text text1, text2;
 	private int scene;
+	private bool endText;
 
 	void Awake()
 	{
-		historyCanvas = GameObject.FindGameObjectWithTag ("HistoryCanvas").GetComponent<Canvas>();
-		generalPanel = GameObject.FindGameObjectWithTag ("History").GetComponent<CanvasGroup>();
-		textPanel1 = GameObject.FindGameObjectWithTag ("Panel1").GetComponent<CanvasGroup>();
-		textPanel2 = GameObject.FindGameObjectWithTag ("Panel2").GetComponent<CanvasGroup>();
-		text1 = GameObject.FindGameObjectWithTag ("Text1").GetComponent<Text>();
-		text2 = GameObject.FindGameObjectWithTag ("Text2").GetComponent<Text>();
-		scene = OptionManager.Instance.Scene;
+		GetReferences ();
 		generalPanel.alpha = 0;
 		textPanel1.alpha = 0;
 		textPanel2.alpha = 0;
@@ -26,11 +22,35 @@ public class CanvasManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level)
 	{
-		if (level < 3) 
+		if (level < 4) 
 		{
-			generalPanel = GameObject.FindGameObjectWithTag ("History").GetComponent<CanvasGroup>();
+			GetReferences ();
+
+			if (level == 1) 
+			{
+				generalPanel.alpha = 1;
+				historyCanvas.sortingOrder = 2;
+				StartCoroutine(generalFadeOut(0.5f,generalPanel));
+			}
+
+			SetHistoryLines (scene);
+			generalPanel.alpha = 1;
+			historyCanvas.sortingOrder = 2;
+			StartCoroutine(generalFadeOut(0.5f,generalPanel));
 		}
 			
+	}
+
+	private void GetReferences()
+	{
+		historyCanvas = GameObject.FindGameObjectWithTag ("HistoryCanvas").GetComponent<Canvas>();
+		generalPanel = GameObject.FindGameObjectWithTag ("History").GetComponent<CanvasGroup>();
+		textPanel1 = GameObject.FindGameObjectWithTag ("Panel1").GetComponent<CanvasGroup>();
+		textPanel2 = GameObject.FindGameObjectWithTag ("Panel2").GetComponent<CanvasGroup>();
+		text1 = GameObject.FindGameObjectWithTag ("Text1").GetComponent<Text>();
+		text2 = GameObject.FindGameObjectWithTag ("Text2").GetComponent<Text>();
+		scene = OptionManager.Instance.Scene;
+		historyCanvas.sortingOrder = 0;
 	}
 
 	private IEnumerator generalFadeIn(float speed, CanvasGroup panel)
@@ -51,10 +71,10 @@ public class CanvasManager : MonoBehaviour {
 			yield return null;
 		}
 
-		StartCoroutine (textFadeOut(1,textPanel1));
-		StartCoroutine (textFadeOut(1,textPanel2));
-		yield return new WaitForSeconds (5);
-		StartCoroutine (generalFadeIn (3, generalPanel));
+		StartCoroutine (textFadeOut(0.5f,textPanel1));
+		StartCoroutine (textFadeOut(0.5f,textPanel2));
+		yield return new WaitForSeconds (2);
+		StartCoroutine (generalFadeIn (5, generalPanel));
 	}
 
 	private IEnumerator textFadeOut(float speed, CanvasGroup panel)
@@ -115,10 +135,12 @@ public class CanvasManager : MonoBehaviour {
 
 	void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.A)) 
+		if (Input.GetMouseButtonDown (0) && SceneManager.GetActiveScene().name != "Dead") 
 		{
-			historyCanvas.sortingOrder = 2;
-			StartCoroutine(generalFadeOut (3, generalPanel));
+			
+			StopAllCoroutines ();
+			historyCanvas.sortingOrder = 0;
+			generalPanel.alpha = 0;
 		}
 	}
 }

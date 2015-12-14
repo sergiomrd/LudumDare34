@@ -40,15 +40,11 @@ public class OptionManager : MonoBehaviour {
 			DontDestroyOnLoad (gameObject);
 		}
 
-		//TO-DO DELETE THIS
-		GettingReferences ();
-		SettingNewScene (scene);
-
 	}
 
 	void OnLevelWasLoaded(int level)
 	{
-		if (level == 0)
+		if (level == 1)
 		{	
 			Scene = 0;
 			GettingReferences ();
@@ -56,13 +52,13 @@ public class OptionManager : MonoBehaviour {
 		}
 
 
-		if (level > 0 && level < 3) 
+		if (level > 1 && level < 4) 
 		{
 			GettingReferences ();
 			SettingNewScene (Scene);
 		}
 
-		if (level == 3)
+		if (level == 4)
 		{
 			SettingDeadScenes (Scene);
 		}

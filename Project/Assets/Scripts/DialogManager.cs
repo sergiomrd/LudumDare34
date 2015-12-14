@@ -55,7 +55,7 @@ public class DialogManager : MonoBehaviour {
 	void OnLevelWasLoaded(int level)
 	{
 		
-		if (level < 3) 
+		if (level > 0 && level < 4) 
 		{
 			endHistory = null;
 			dialog = GameObject.Find ("DialogText").GetComponent<Text> ();
@@ -63,7 +63,7 @@ public class DialogManager : MonoBehaviour {
 			GetDialogs (scene);
 		}
 
-		if (level == 3) 
+		if (level == 4) 
 		{
 			dialog = null;
 			endHistory = GameObject.Find ("Endtext").GetComponent<Text> ();
